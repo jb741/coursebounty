@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CourseBounty — Designer Survey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0F1419;
+      --surface: #1A2332;
+      --card: #131C2B;
+      --neon: #00FF87;
+      --blue: #00B4FF;
+      --orange: #FF6B35;
+      --text: #FFFFFF;
+      --muted: #A0AEC0;
+      --border: rgba(0,255,135,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,135,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,135,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    * { position: relative; z-index: 1; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15,20,25,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--neon);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0,255,135,0.3);
+    }
+    .logo-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 1px; }
+    .logo-word { font-size: 1.15rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; }
+    .logo-word .w1 { color: #fff; }
+    .logo-word .w2 { color: var(--neon); }
+    .logo-tagline { font-size: 0.58rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+    .container { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+    .hero { padding: 70px 0 40px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0,180,255,0.15);
+      border: 1px solid rgba(0,180,255,0.4);
+      color: var(--blue);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; margin-bottom: 14px; }
+    .subtitle { color: var(--muted); font-size: 1.05rem; max-width: 620px; }
+
+    .form-wrap { margin: 40px 0 80px; display: flex; flex-direction: column; gap: 18px; }
+    .q-card {
+      background: var(--card);
+      border: 1px solid rgba(0,255,135,0.1);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .q-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .q-num {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--neon); color: #000; font-weight: 800; font-size: 0.8rem;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .q-label { font-weight: 700; font-size: 0.95rem; }
+
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    label.option {
+      display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text);
+      font-size: 0.95rem;
+    }
+    input[type="radio"], input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none; width: 18px; height: 18px;
+      border: 1px solid rgba(0,255,135,0.35); border-radius: 4px; background: transparent; position: relative;
+    }
+    input[type="radio"] { border-radius: 50%; }
+    input[type="radio"]:checked, input[type="checkbox"]:checked {
+      background: var(--neon);
+      box-shadow: 0 0 10px rgba(0,255,135,0.35);
+      border-color: var(--neon);
+    }
+    input[type="radio"]:checked::after {
+      content: ''; position: absolute; inset: 4px; background: #0F1419; border-radius: 50%;
+    }
+    input[type="checkbox"]:checked::after {
+      content: ''; position: absolute; width: 6px; height: 10px; border: 2px solid #0F1419; border-top: 0; border-left: 0;
+      transform: rotate(45deg); left: 5px; top: 1px;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%; background: #0F1419; color: var(--text); border: 1px solid rgba(0,255,135,0.2);
+      border-radius: 8px; padding: 12px 14px; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--neon); box-shadow: 0 0 0 2px rgba(0,255,135,0.15); }
+
+    .submit-btn {
+      margin-top: 10px;
+      background: var(--neon);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      padding: 14px 22px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .success {
+      display: none;
+      background: rgba(0,255,135,0.08);
+      border: 1px solid rgba(0,255,135,0.3);
+      border-radius: 8px;
+      padding: 28px;
+      font-size: 1.1rem;
+    }
+    .inline-input { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">
+      <div class="logo-icon">⛳</div>
+      <div class="logo-wordmark">
+        <div class="logo-word"><span class="w1">Course</span><span class="w2">Bounty</span></div>
+        <div class="logo-tagline">GSPro Course Marketplace</div>
+      </div>
+    </a>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-badge">🎨 Quick Survey</span>
+      <h1>Tell Us How You Work</h1>
+      <p class="subtitle">Takes 2 minutes. Helps us build a platform that actually works for designers.</p>
+    </section>
+
+    <div id="success" class="success">🏆 Thanks! You're officially helping shape CourseBounty. We'll be in touch.</div>
+
+    <form id="survey-form" class="form-wrap">
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">1</span><div class="q-label">How long have you been designing GSPro courses?</div></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="Less than 6 months" required>Less than 6 months</label>
+          <label class="option"><input type="radio" name="q1" value="6–12 months">6–12 months</label>
+          <label class="option"><input type="radio" name="q1" value="1–2 years">1–2 years</label>
+          <label class="option"><input type="radio" name="q1" value="2+ years">2+ years</label>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">2</span><div class="q-label">Have you taken on paid commissions before?</div></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="Yes, regularly" required>Yes, regularly</label>
+          <label class="option"><input type="radio" name="q2" value="Yes, occasionally">Yes, occasionally</label>
+          <label class="option"><input type="radio" name="q2" value="I'm on Patreon only">I'm on Patreon only</label>
+          <label class="option"><input type="radio" name="q2" value="No, not yet">No, not yet</label>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">3</span><div class="q-label">How do you currently find clients or commission requests?</div></div>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q3" value="Discord">Discord</label>
+          <label class="option"><input type="checkbox" name="q3" value="Reddit">Reddit</label>
+          <label class="option"><input type="checkbox" name="q3" value="Word of mouth">Word of mouth</label>
+          <label class="option"><input type="checkbox" name="q3" value="My own website">My own website</label>
+          <label class="option"><input type="checkbox" name="q3" value="Patreon">Patreon</label>
+          <label class="option"><input type="checkbox" name="q3" value="Other">Other</label>
+        </div>
+        <div class="inline-input"><input type="text" id="q3-other" placeholder="Other (please specify)" /></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">4</span><div class="q-label">What do you typically charge for a full 18-hole course build?</div></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="Under $200" required>Under $200</label>
+          <label class="option"><input type="radio" name="q4" value="$200–$500">$200–$500</label>
+          <label class="option"><input type="radio" name="q4" value="$500–$1,000">$500–$1,000</label>
+          <label class="option"><input type="radio" name="q4" value="$1,000–$2,000">$1,000–$2,000</label>
+          <label class="option"><input type="radio" name="q4" value="$2,000+">$2,000+</label>
+          <label class="option"><input type="radio" name="q4" value="I don't charge / hobby only">I don't charge / hobby only</label>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">5</span><div class="q-label">What's the most frustrating part of your current client process?</div></div>
+        <textarea id="q5" placeholder="Share what's most frustrating..."></textarea>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">6</span><div class="q-label">How many paid commissions could you realistically handle per month?</div></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q6" value="1" required>1</label>
+          <label class="option"><input type="radio" name="q6" value="2–3">2–3</label>
+          <label class="option"><input type="radio" name="q6" value="4–5">4–5</label>
+          <label class="option"><input type="radio" name="q6" value="5+">5+</label>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">7</span><div class="q-label">When starting a new build, what information do you need from the client?</div></div>
+        <textarea id="q7" placeholder="List what you need up front..." ></textarea>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">8</span><div class="q-label">Would you offer tiered pricing (e.g. basic / standard / premium builds)?</div></div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q8" value="Yes" required>Yes</label>
+          <label class="option"><input type="radio" name="q8" value="Maybe">Maybe</label>
+          <label class="option"><input type="radio" name="q8" value="No, I charge one rate">No, I charge one rate</label>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">9</span><div class="q-label">What would make a marketplace platform worth using for you?</div></div>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q9" value="Steady stream of clients">Steady stream of clients</label>
+          <label class="option"><input type="checkbox" name="q9" value="Secure / guaranteed payments">Secure / guaranteed payments</label>
+          <label class="option"><input type="checkbox" name="q9" value="Client rating system">Client rating system</label>
+          <label class="option"><input type="checkbox" name="q9" value="Portfolio showcase page">Portfolio showcase page</label>
+          <label class="option"><input type="checkbox" name="q9" value="Low platform fee (under 10%)">Low platform fee (under 10%)</label>
+          <label class="option"><input type="checkbox" name="q9" value="Built-in messaging with clients">Built-in messaging with clients</label>
+          <label class="option"><input type="checkbox" name="q9" value="Other">Other</label>
+        </div>
+        <div class="inline-input"><input type="text" id="q9-other" placeholder="Other (please specify)" /></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-head"><span class="q-num">10</span><div class="q-label">What would make you trust a platform enough to use it for client payments?</div></div>
+        <textarea id="q10" placeholder="Tell us what would build trust..." ></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">SUBMIT SURVEY →</button>
+    </form>
+  </main>
+
+  <script>
+    const SB_URL = 'https://abbcylofbokykkoaknnn.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm9zZSIsInJlZiI6ImFiYmN5bG9mYm9reWtrb2Frbm5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTEwMjYsImV4cCI6MjA4NzE2NzAyNn0.DgxNk30I6gOGfee5QDmxjOYwmsKpmw43-2OGmwD2K0c';
+    const form = document.getElementById('survey-form');
+    const success = document.getElementById('success');
+
+    const getRadio = (name) => {
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      return sel ? sel.value : '';
+    };
+    const getCheckboxes = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      const orig = btn.textContent;
+      btn.textContent = 'SUBMITTING...';
+      btn.disabled = true;
+
+      const emailParam = new URLSearchParams(window.location.search).get('email');
+      const email = emailParam ? decodeURIComponent(emailParam) : '';
+
+      const answers = {
+        q1: getRadio('q1'),
+        q2: getRadio('q2'),
+        q3: getCheckboxes('q3'),
+        q3_other: document.getElementById('q3-other').value.trim(),
+        q4: getRadio('q4'),
+        q5: document.getElementById('q5').value.trim(),
+        q6: getRadio('q6'),
+        q7: document.getElementById('q7').value.trim(),
+        q8: getRadio('q8'),
+        q9: getCheckboxes('q9'),
+        q9_other: document.getElementById('q9-other').value.trim(),
+        q10: document.getElementById('q10').value.trim()
+      };
+
+      try {
+        const res = await fetch(SB_URL + '/rest/v1/survey_responses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SB_KEY,
+            'Authorization': 'Bearer ' + SB_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email: email, role: 'designer', answers: answers })
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          throw new Error('server');
+        }
+      } catch (err) {
+        btn.textContent = orig;
+        btn.disabled = false;
+        alert('Something went wrong — please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

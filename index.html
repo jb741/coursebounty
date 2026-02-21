@@ -1020,8 +1020,8 @@
           body: JSON.stringify({ email, role })
         });
         if (res.ok || res.status === 409) {
-          document.getElementById(wrapId).style.display = 'none';
-          document.getElementById(successId).style.display = 'block';
+          const surveyPage = role === 'designer' ? '/survey-designer' : '/survey-golfer';
+          window.location.href = surveyPage + '?email=' + encodeURIComponent(email);
         } else {
           throw new Error('Server error');
         }
