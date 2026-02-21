@@ -335,7 +335,7 @@
           },
           body: JSON.stringify({ email: email, role: 'designer', answers: answers })
         });
-        if (res.ok) {
+        if (res.ok || res.status === 409) {
           form.style.display = 'none';
           success.style.display = 'block';
         } else {
