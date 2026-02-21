@@ -190,6 +190,10 @@
     <div id="success" class="success">🏆 Thanks! You're officially helping shape CourseBounty. We'll be in touch.</div>
 
     <form id="survey-form" class="form-wrap">
+      <div class="question-card">
+        <div class="question-label"><span class="q-num">✉️</span> Your Email Address</div>
+        <input type="email" id="email-field" placeholder="your@email.com" style="width:100%;padding:12px 16px;background:#0F1419;border:2px solid rgba(0,255,135,0.2);border-radius:6px;color:#fff;font-size:0.95rem;font-family:'Space Grotesk',sans-serif;outline:none;box-sizing:border-box;" required>
+      </div>
       <div class="q-card">
         <div class="q-head"><span class="q-num">1</span><div class="q-label">How long have you been designing GSPro courses?</div></div>
         <div class="options">
@@ -200,8 +204,17 @@
         </div>
       </div>
 
+      <div class="question-card">
+        <div class="question-label"><span class="q-num">2</span> Are you a professional design studio?</div>
+        <label class="radio-label"><input type="radio" name="studio" value="yes" id="studio-yes"> Yes</label>
+        <label class="radio-label"><input type="radio" name="studio" value="no"> No — I design independently</label>
+        <div id="studio-website-wrap" style="display:none;margin-top:12px;">
+          <input type="url" id="studio-website" placeholder="https://yourstudio.com" style="width:100%;padding:12px 16px;background:#0F1419;border:2px solid rgba(0,180,255,0.3);border-radius:6px;color:#fff;font-size:0.95rem;font-family:'Space Grotesk',sans-serif;outline:none;box-sizing:border-box;">
+        </div>
+      </div>
+
       <div class="q-card">
-        <div class="q-head"><span class="q-num">2</span><div class="q-label">Have you taken on paid commissions before?</div></div>
+        <div class="q-head"><span class="q-num">3</span><div class="q-label">Have you taken on paid commissions before?</div></div>
         <div class="options">
           <label class="option"><input type="radio" name="q2" value="Yes, regularly" required>Yes, regularly</label>
           <label class="option"><input type="radio" name="q2" value="Yes, occasionally">Yes, occasionally</label>
@@ -211,7 +224,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">3</span><div class="q-label">How do you currently find clients or commission requests?</div></div>
+        <div class="q-head"><span class="q-num">4</span><div class="q-label">How do you currently find clients or commission requests?</div></div>
         <div class="options">
           <label class="option"><input type="checkbox" name="q3" value="Discord">Discord</label>
           <label class="option"><input type="checkbox" name="q3" value="Reddit">Reddit</label>
@@ -224,24 +237,24 @@
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">4</span><div class="q-label">What do you typically charge for a full 18-hole course build?</div></div>
+        <div class="q-head"><span class="q-num">5</span><div class="q-label">What do you typically charge for a full 18-hole course build?</div></div>
         <div class="options">
-          <label class="option"><input type="radio" name="q4" value="Under $200" required>Under $200</label>
-          <label class="option"><input type="radio" name="q4" value="$200–$500">$200–$500</label>
-          <label class="option"><input type="radio" name="q4" value="$500–$1,000">$500–$1,000</label>
-          <label class="option"><input type="radio" name="q4" value="$1,000–$2,000">$1,000–$2,000</label>
-          <label class="option"><input type="radio" name="q4" value="$2,000+">$2,000+</label>
-          <label class="option"><input type="radio" name="q4" value="I don't charge / hobby only">I don't charge / hobby only</label>
+          <label class="radio-label"><input type="radio" name="q4" value="Under $500"> Under $500</label>
+          <label class="radio-label"><input type="radio" name="q4" value="$500–$1,000"> $500–$1,000</label>
+          <label class="radio-label"><input type="radio" name="q4" value="$1,000–$2,000"> $1,000–$2,000</label>
+          <label class="radio-label"><input type="radio" name="q4" value="$2,000–$3,000"> $2,000–$3,000</label>
+          <label class="radio-label"><input type="radio" name="q4" value="$3,000+"> $3,000+</label>
+          <label class="radio-label"><input type="radio" name="q4" value="hobby"> I don't charge / hobby only</label>
         </div>
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">5</span><div class="q-label">What's the most frustrating part of your current client process?</div></div>
+        <div class="q-head"><span class="q-num">6</span><div class="q-label">What's the most frustrating part of your current client process?</div></div>
         <textarea id="q5" placeholder="Share what's most frustrating..."></textarea>
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">6</span><div class="q-label">How many paid commissions could you realistically handle per month?</div></div>
+        <div class="q-head"><span class="q-num">7</span><div class="q-label">How many paid commissions could you realistically handle per month?</div></div>
         <div class="options">
           <label class="option"><input type="radio" name="q6" value="1" required>1</label>
           <label class="option"><input type="radio" name="q6" value="2–3">2–3</label>
@@ -251,40 +264,38 @@
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">7</span><div class="q-label">When starting a new build, what information do you need from the client?</div></div>
+        <div class="q-head"><span class="q-num">8</span><div class="q-label">When starting a new build, what information do you need from the client?</div></div>
         <textarea id="q7" placeholder="List what you need up front..." ></textarea>
       </div>
 
-      <div class="q-card">
-        <div class="q-head"><span class="q-num">8</span><div class="q-label">Would you offer tiered pricing (e.g. basic / standard / premium builds)?</div></div>
-        <div class="options">
-          <label class="option"><input type="radio" name="q8" value="Yes" required>Yes</label>
-          <label class="option"><input type="radio" name="q8" value="Maybe">Maybe</label>
-          <label class="option"><input type="radio" name="q8" value="No, I charge one rate">No, I charge one rate</label>
-        </div>
+      <div class="question-card">
+        <div class="question-label"><span class="q-num">9</span> What do you take into consideration when pricing a job?</div>
+        <textarea id="q8" rows="3" placeholder="e.g. course complexity, LiDAR availability, travel time in footage, client's deadline..." style="width:100%;padding:12px 16px;background:#0F1419;border:2px solid rgba(0,255,135,0.2);border-radius:6px;color:#fff;font-size:0.95rem;font-family:'Space Grotesk',sans-serif;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">9</span><div class="q-label">What would make a marketplace platform worth using for you?</div></div>
+        <div class="q-head"><span class="q-num">10</span><div class="q-label">What would make a marketplace platform worth using for you?</div></div>
         <div class="options">
           <label class="option"><input type="checkbox" name="q9" value="Steady stream of clients">Steady stream of clients</label>
           <label class="option"><input type="checkbox" name="q9" value="Secure / guaranteed payments">Secure / guaranteed payments</label>
           <label class="option"><input type="checkbox" name="q9" value="Client rating system">Client rating system</label>
-          <label class="option"><input type="checkbox" name="q9" value="Portfolio showcase page">Portfolio showcase page</label>
-          <label class="option"><input type="checkbox" name="q9" value="Low platform fee (under 10%)">Low platform fee (under 10%)</label>
-          <label class="option"><input type="checkbox" name="q9" value="Built-in messaging with clients">Built-in messaging with clients</label>
+          <label class="option"><input type="checkbox" name="q9" value="Portfolio showcase page">Portfolio showcase page</label>          <label class="option"><input type="checkbox" name="q9" value="Built-in messaging with clients">Built-in messaging with clients</label>
           <label class="option"><input type="checkbox" name="q9" value="Other">Other</label>
         </div>
         <div class="inline-input"><input type="text" id="q9-other" placeholder="Other (please specify)" /></div>
       </div>
 
       <div class="q-card">
-        <div class="q-head"><span class="q-num">10</span><div class="q-label">What would make you trust a platform enough to use it for client payments?</div></div>
+        <div class="q-head"><span class="q-num">11</span><div class="q-label">What would make you trust a platform enough to use it for client payments?</div></div>
         <textarea id="q10" placeholder="Tell us what would build trust..." ></textarea>
       </div>
 
       <button type="submit" class="submit-btn">SUBMIT SURVEY →</button>
     </form>
+    <script>
+      const eparam = new URLSearchParams(window.location.search).get('email');
+      if (eparam) document.getElementById('email-field').value = decodeURIComponent(eparam);
+    </script>
   </main>
 
   <script>
@@ -299,6 +310,12 @@
     };
     const getCheckboxes = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value);
 
+    document.querySelectorAll('input[name="studio"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.getElementById('studio-website-wrap').style.display = r.value === 'yes' ? 'block' : 'none';
+      });
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
@@ -307,10 +324,12 @@
       btn.disabled = true;
 
       const emailParam = new URLSearchParams(window.location.search).get('email');
-      const email = emailParam ? decodeURIComponent(emailParam) : '';
+      const email = document.getElementById('email-field').value.trim() || (emailParam ? decodeURIComponent(emailParam) : '');
 
       const answers = {
         q1: getRadio('q1'),
+        studio: getRadio('studio'),
+        studio_website: document.getElementById('studio-website').value.trim(),
         q2: getRadio('q2'),
         q3: getCheckboxes('q3'),
         q3_other: document.getElementById('q3-other').value.trim(),
@@ -318,7 +337,7 @@
         q5: document.getElementById('q5').value.trim(),
         q6: getRadio('q6'),
         q7: document.getElementById('q7').value.trim(),
-        q8: getRadio('q8'),
+        q8: document.getElementById('q8').value.trim(),
         q9: getCheckboxes('q9'),
         q9_other: document.getElementById('q9-other').value.trim(),
         q10: document.getElementById('q10').value.trim()
